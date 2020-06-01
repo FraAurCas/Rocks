@@ -1,5 +1,7 @@
 import java.lang.Math.*;
-public class Material {
+import javafx.scene.shape.Rectangle;
+
+public class Material extends Rectangle {
     private String name;
     private String color;
     private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids 
@@ -11,7 +13,9 @@ public class Material {
     private Material right = null;
     private Material below = null;
 
-    public Material(String name, String color, int maxLayers, int vSpeed, int spikeHeight){
+    public Material(String name, String color, int maxLayers, int vSpeed, int spikeHeight, int x, int y){
+        super(x, y, 20, 20);
+        
         this.name = name;
         this.color = color;
         this.maxLayers = maxLayers;

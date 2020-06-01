@@ -12,9 +12,9 @@ public class SimArea extends Application{
         final int FPS = 144;
 
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
-            GridPane sim = new GridPane();      //Where the actual simulation occurs. 
-            sim.setGridLinesVisible(true);
-            sim.getChildren().addAll();         //Any actors in the simulation need to be added here
+            Pane sim = new Pane();      //Where the actual simulation occurs. 
+            //sim.setGridLinesVisible(true);
+            sim.getChildren().addAll(new Material("Rock", "Green", 10, 10, 10, 500, 500));         //Any actors in the simulation need to be added here
 
             HBox hbox = new HBox();             //Will be used to add buttons and things later
         vbox.getChildren().addAll(sim, hbox);
