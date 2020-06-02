@@ -5,10 +5,11 @@ public class Dirt extends Material implements LooseSolid{
     }
 
     public void levelV(){
-        levelV(super.getmaxLayers(), super.getcurLayer(), this, super.getspikeHeight(), 0);
+        Material thisPixel = this;
+        levelV(thisPixel, super.getmaxLayers(), super.getcurLayer(), this, super.getspikeHeight(), 0);
     }
 
-    public void levelV(int getmaxLayers, int getcurLayers, Material currentPixel, int spikeHeight, int curSpikeHeight){
+    public void levelV(Material movingPixel, int getmaxLayers, int getcurLayers, Material currentPixel, int spikeHeight, int curSpikeHeight){
         if(currentPixel.getcurLayer() == 1)
             {}
         else if(currentPixel.getLeft() == null && currentPixel.getRight() == null){
@@ -21,7 +22,7 @@ public class Dirt extends Material implements LooseSolid{
                }
             }
             else{
-                levelV(super.getmaxLayers(), super.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
+                levelV(movingPixel, super.getmaxLayers(), super.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
             }
         }
         else if(currentPixel.getLeft()== null){

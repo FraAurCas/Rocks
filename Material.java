@@ -1,5 +1,6 @@
 import java.lang.Math.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 
 public class Material extends Rectangle {
     private String name;
@@ -9,9 +10,11 @@ public class Material extends Rectangle {
     private int vSpeed; //should be the amount of frames between movements
     private int spikeHeight;
     private int curSpikeHeight;
-    private Material left = null;
-    private Material right = null;
-    private Material below = null;
+    private int mass; //controls the fall speed of the material
+    private int density; //*will* determine which material goes above another
+    private Material left = null; //These will need to actually have ways to be found later.
+    private Material right = null;//It might work just by checking what's in a spot x or y in the next direction,
+    private Material below = null;//otherwise, we might be able to just check what an edge touches.
 
     public Material(String name, String color, int maxLayers, int vSpeed, int spikeHeight, int x, int y){
         super(x, y, 20, 20);
@@ -21,6 +24,12 @@ public class Material extends Rectangle {
         this.maxLayers = maxLayers;
         this.vSpeed = vSpeed;
         this.spikeHeight = spikeHeight;
+    }
+
+    public void fall(){
+        while(getY()<720){//&& !(touching another thing. I guess the other material would need to be solid.)
+            setY(getY()+1);
+        }
     }
 
     public int getmaxLayers(){
