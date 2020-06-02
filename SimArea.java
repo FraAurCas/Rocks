@@ -1,38 +1,52 @@
-import javafx.animation.*;
-import javafx.application.Application;
-import javafx.event.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
-import javafx.util.Duration;
+public class SimArea {
+    private Material[][] world;
+    private final int X_LEN;
+    private final int Y_LEN;
 
-public class SimArea extends Application{
-    public void start(Stage primaryStage){
-
-        final int FPS = 144;
-
-        VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
-            Pane sim = new Pane();      //Where the actual simulation occurs. 
-            //sim.setGridLinesVisible(true);
-            sim.getChildren().addAll(new Material("Rock", "Green", 10, 10, 10, 500, 500));         //Any actors in the simulation need to be added here
-
-            HBox hbox = new HBox();             //Will be used to add buttons and things later
-        vbox.getChildren().addAll(sim, hbox);
-
-        final Scene scene = new Scene(vbox, 1280, 720); //Display setup. Numbers are display resolution
-        primaryStage.setTitle("Rocks");                 //Title
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        final Timeline loop = new Timeline(new KeyFrame(Duration.millis(1000 / FPS), t -> { //This is where all looped code goes
-            
-        }));
-
-        loop.setCycleCount(Timeline.INDEFINITE);
-        loop.play();
+    public SimArea(int x, int y) {
+        X_LEN = x;
+        Y_LEN = y;
+        world = new Material[x][y];
     }
 
-    public static void main(final String[] args) { 
-        launch(args);
-    };
+    public void simulate() { //Looped code
+
+    }
+
+    /**
+     * Returns the material at the given location. Throws ArrayIndexOutOfBoundsException if x or y are to large for 
+     * the game board.
+     * @param x
+     * @param y
+     * @return
+     */
+    public Material getMaterial(int x, int y) {
+        if (x >= X_LEN || y >= Y_LEN)
+            throw new ArrayIndexOutOfBoundsException(x + ", " + y + " does not exist within the game board");
+        return world[x][y];
+    }
+
+    /**
+     * Puts a new material on the board a the specified location. Returns the material formerly there. Throws 
+     * ArrayIndexOutOfBoundsException if x or y are to large for the game board.
+     * @param m
+     * @param x
+     * @param y
+     * @return
+     */
+    public Material add(Material m, int x, int y) {
+        if (x >= X_LEN || y >= Y_LEN)
+            throw new ArrayIndexOutOfBoundsException(x + ", " + y + " does not exist within the game board");
+        Material temp = world[x][y];
+        world[x][y] = m;
+        return temp;
+    }
+
+    public int getXLen() {
+        return X_LEN;
+    }
+
+    public int getYLen() {
+        return Y_LEN;
+    }
 }

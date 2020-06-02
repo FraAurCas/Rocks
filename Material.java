@@ -2,7 +2,8 @@ import java.lang.Math.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.*;
 
-public class Material extends Rectangle {
+public class Material {
+    private SimArea sim;
     private String name;
     private String color;
     private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids 
@@ -12,24 +13,28 @@ public class Material extends Rectangle {
     private int curSpikeHeight;
     private int mass; //controls the fall speed of the material
     private int density; //*will* determine which material goes above another
+    private int x; //Both sim area and the material need to keep track of this independently
+    private int y; //Otherwise, the bad stuff will happen
     private Material left = null; //These will need to actually have ways to be found later.
     private Material right = null;//It might work just by checking what's in a spot x or y in the next direction,
     private Material below = null;//otherwise, we might be able to just check what an edge touches.
 
-    public Material(String name, String color, int maxLayers, int vSpeed, int spikeHeight, int x, int y){
-        super(x, y, 20, 20);
-        
+    public Material(SimArea sim, String name, String color, int maxLayers, int vSpeed, int spikeHeight, int x, int y){
+        this.sim = sim;
         this.name = name;
         this.color = color;
         this.maxLayers = maxLayers;
         this.vSpeed = vSpeed;
         this.spikeHeight = spikeHeight;
+        this.x = x;
+        this.y = y;
     }
 
+    //TODO: Work on this
     public void fall(){
-        while(getY()<720){//&& !(touching another thing. I guess the other material would need to be solid.)
-            setY(getY()+1);
-        }
+        // while(getY()<720){//&& !(touching another thing. I guess the other material would need to be solid.)
+        //     setY(getY()+1);
+        // }
     }
 
     public int getmaxLayers(){
