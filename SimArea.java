@@ -1,3 +1,5 @@
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class SimArea {
     private Material[][] world;
     private final int X_LEN;
@@ -25,7 +27,7 @@ public class SimArea {
             throw new ArrayIndexOutOfBoundsException(x + ", " + y + " does not exist within the game board");
         return world[x][y];
     }
-
+    
     /**
      * Puts a new material on the board a the specified location. Returns the material formerly there. Throws 
      * ArrayIndexOutOfBoundsException if x or y are to large for the game board.
@@ -48,5 +50,10 @@ public class SimArea {
 
     public int getYLen() {
         return Y_LEN;
+    }
+
+    public void changeMatPos(Material m, int firstX, int firstY, int secondX, int secondY){
+        world[secondX][secondY] = m;
+        world[firstX][firstY] = null;
     }
 }

@@ -32,9 +32,9 @@ public class Material {
 
     //TODO: Work on this
     public void fall(){
-        // while(getY()<720){//&& !(touching another thing. I guess the other material would need to be solid.)
-        //     setY(getY()+1);
-        // }
+        while(getY()<720 && sim.getMaterial(x, y+1) == null ){//second part will need to be refined to be
+            setY(y+1);                                        //not solid.
+        }
     }
 
     public int getmaxLayers(){
@@ -67,5 +67,36 @@ public class Material {
 
     public int getcurSpikeHeight(){
         return curSpikeHeight;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public void setY(int d){
+        sim.changeMatPos(this, x, y, x, d);
+        y=d;
+    }
+
+    public void setX(int d){
+        sim.changeMatPos(this, x, y, d, y);
+        x=d;
+    }
+
+    public void moveRight(){
+        setX(x+1);    
+    }
+    public void moveLeft(){
+        setX(x-1);    
+    }
+    public void moveDown(){
+        setX(y+1);    
+    }
+    public void moveUp(){
+        setX(y-1);    
     }
 }

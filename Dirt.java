@@ -1,6 +1,6 @@
 public class Dirt extends Material implements LooseSolid{
-    public Dirt(int x, int y) {
-        super("Dirt", "Brown", 3, 30, 3, x, y);
+    public Dirt(SimArea sim, int x, int y) {
+        super(sim, "Dirt", "Brown", 3, 30, 3, x, y);
 
     }
 
