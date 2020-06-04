@@ -15,21 +15,26 @@ public class Dirt extends Material implements LooseSolid{
         else if(currentPixel.getLeft() == null && currentPixel.getRight() == null){
             if(curSpikeHeight >=spikeHeight){
                 if(Math.random()>0.5){
-                    //move left
+                    setX(getX()-1);
+                    super.fall();
+                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
                 }
                 else{
-                //move right
+                    setX(getX()+1);
+                    super.fall();
+                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
                }
             }
             else{
-                levelV(movingPixel, super.getmaxLayers(), super.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
+                levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
             }
         }
         else if(currentPixel.getLeft()== null){
-            //move left
+            setX(getX()-1);
+            super.fall();
         }
         else{
-            //move right
+            setX(getX()+1);
         }
     }
     

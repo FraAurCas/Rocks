@@ -42,7 +42,11 @@ public class Material {
     }
 
     public int getcurLayer(){
-        return curLayer;
+        if(getY()==720)
+            return 1;
+        else{
+            return sim.getMaterial(x, y+1).getcurLayer()+1;
+        }
     }
 
     public double getvSpeed(){
