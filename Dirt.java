@@ -1,6 +1,6 @@
 public class Dirt extends Material implements LooseSolid{
     public Dirt(SimArea sim, int x, int y) {
-        super(sim, "Dirt", "Brown", 3, 30, 3, x, y);
+        super(sim, "Dirt", "Brown", 3, 30, 3, x, y, true);
 
     }
 
@@ -17,12 +17,12 @@ public class Dirt extends Material implements LooseSolid{
                 if(Math.random()>0.5){
                     setX(getX()-1);
                     super.fall();
-                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
+                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
                 }
                 else{
                     setX(getX()+1);
                     super.fall();
-                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
+                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
                }
             }
             else{
@@ -32,9 +32,12 @@ public class Dirt extends Material implements LooseSolid{
         else if(currentPixel.getLeft()== null){
             setX(getX()-1);
             super.fall();
+            levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
         }
         else{
             setX(getX()+1);
+            super.fall();
+            levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
         }
     }
     
