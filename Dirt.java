@@ -1,3 +1,6 @@
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
 public class Dirt extends Material implements LooseSolid{
     public Dirt(SimArea sim, int x, int y) {
         super(sim, "Dirt", "Brown", 3, 30, 3, x, y, true);
@@ -14,6 +17,12 @@ public class Dirt extends Material implements LooseSolid{
             {}
         else if(currentPixel.getLeft() == null && currentPixel.getRight() == null){
             if(curSpikeHeight >=spikeHeight){
+                try{
+                    Thread.sleep(getvSpeed());
+                }
+                catch(InterruptedException ex){
+                    //why does it make me do this, we don't need it >:((((
+                }
                 if(Math.random()>0.5){
                     setX(getX()-1);
                     super.fall();

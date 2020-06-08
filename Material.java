@@ -9,7 +9,7 @@ public class Material {
     private boolean isSolid;
     private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids 
     private int curLayer;  //so you don't get huge stacks of water or something. curLayer tracks the layer.
-    private int vSpeed; //should be the amount of frames between movements
+    private long vSpeed; //should be the amount of milliseconds between movements
     private int spikeHeight;
     private int curSpikeHeight;
     private int mass; //controls the fall speed of the material
@@ -20,7 +20,7 @@ public class Material {
     private Material right = null;//It might work just by checking what's in a spot x or y in the next direction,
     private Material below = null;//otherwise, we might be able to just check what an edge touches.
 
-    public Material(SimArea sim, String name, String color, int maxLayers, int vSpeed, int spikeHeight, int x, int y, boolean isSolid){
+    public Material(SimArea sim, String name, String color, int maxLayers, long vSpeed, int spikeHeight, int x, int y, boolean isSolid){
         this.sim = sim;
         this.name = name;
         this.color = color;
@@ -55,7 +55,7 @@ public class Material {
         }
     }
 
-    public double getvSpeed(){
+    public long getvSpeed(){
         return vSpeed;
     }
 
