@@ -7,17 +7,21 @@ public class Dirt extends Material implements LooseSolid{
         super(sim, "Dirt", Color.BROWN, 3, 30, 3, x, y, true);
 
     }
-
+    @Override
+    public void level(){
+        levelV();
+    }
     public void levelV(){
         Material thisPixel = this;
-        levelV(thisPixel, super.getmaxLayers(), super.getcurLayer(), this, super.getspikeHeight(), 0);
+        levelV(thisPixel, super.getmaxLayers(), super.getcurLayer(), this, super.getspikeHeight(), 1);
     }
 
     public void levelV(Material movingPixel, int getmaxLayers, int getcurLayers, Material currentPixel, int spikeHeight, int curSpikeHeight){
         if(currentPixel.getcurLayer() == 1)
             {}
         else if(currentPixel.getLeft() == null && currentPixel.getRight() == null){
-            if(curSpikeHeight >=spikeHeight){
+            //System.out.println("\n\ncurspikeheight: "+ curSpikeHeight+"\nspikeHeight: "+spikeHeight+"\ncurpixellayer: "+currentPixel.getcurLayer());
+            if(curSpikeHeight >= spikeHeight){
                 try{
                     Thread.sleep(getvSpeed());
                 }
@@ -25,29 +29,49 @@ public class Dirt extends Material implements LooseSolid{
                     //why does it make me do this, we don't need it >:((((
                 }
                 if(Math.random()>0.5){
+                    
                     setX(getX()-1);
                     super.fall();
                     levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
                 }
                 else{
+                    
                     setX(getX()+1);
                     super.fall();
                     levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
                }
             }
             else{
-                levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, ++curSpikeHeight);
+                if(currentPixel.getBelow() != null){
+                levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, curSpikeHeight+1);
+                }
             }
         }
         else if(currentPixel.getLeft()== null){
-            setX(getX()-1);
+            if(curSpikeHeight > spikeHeight){
+                try{
+                    Thread.sleep(getvSpeed());
+                }
+                catch(InterruptedException ex){
+                    //why does it make me do this, we don't need it >:((((
+                }
+            movingPixel.setX(getX()-1);
             super.fall();
             levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
+            }
         }
         else{
-            setX(getX()+1);
+            if(curSpikeHeight > spikeHeight){
+                try{
+                    Thread.sleep(getvSpeed());
+                }
+                catch(InterruptedException ex){
+                    //why does it make me do this, we don't need it >:((((
+                }
+            movingPixel.setX(getX()+1);
             super.fall();
             levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(), currentPixel.getBelow(), spikeHeight, 0);
+            }
         }
     }
     
