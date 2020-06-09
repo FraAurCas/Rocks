@@ -16,7 +16,7 @@ public class SimArea {
             for (int y = 0; y < Y_LEN; y++) {
                 Material m = world[x][y];
                 if (m != null && !m.moved()) {
-                    m.fall();
+                    m.level();
                     m.setMoved(true);
                 }
             }

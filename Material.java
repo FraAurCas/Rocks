@@ -38,14 +38,15 @@ public class Material {
         
     }
     //TODO: Work on this
-    public void fall(){
+    public boolean fall(){
         if (y < sim.getYLen() -1 && (sim.getMaterial(x, y+1) == null || !sim.getMaterial(x, y+1).isSolid())){//second part will need to be refined to be
-            setY(y+1);                                        //not solid.
+            setY(y+1);                                 //not solid.
+            return true;
             //System.out.println(y);
         }
         else{
             //System.out.println("Layer: " + getcurLayer() + "\nSpike: " + getcurSpikeHeight());
-            level();
+            return false;
         }
     }
 
@@ -61,7 +62,7 @@ public class Material {
         if(getY()==sim.getYLen()-1)
             return 1;
         else{
-            return (sim.getMaterial(x, y+1).getcurLayer()+1);
+            return (getBelow().getcurLayer()+1);
         }
     }
 
@@ -85,7 +86,16 @@ public class Material {
         return spikeHeight;
     }
 
-    public int getcurSpikeHeight(){
+    public int getcurSpikeHeight(){//TODO make actually find spike height
+        // if(getY()==sim.getYLen()-1 && getRight()==null&&getLeft()==null)
+        //     return 1;
+        // else if(getBelow()!=null && getBelow().getRight()!=null && getBelow().getLeft()!=null && getRight()==null && getLeft()==null)
+        //     return 1;
+        // else if (getRight()==null||getLeft()==null)
+        //     return (getBelow().getcurSpikeHeight()+1);
+        // else{
+        //     return 0;
+        // }
         return curSpikeHeight;
     }
 
