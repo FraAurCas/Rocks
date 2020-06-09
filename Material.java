@@ -1,11 +1,12 @@
 import java.lang.Math.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.*;
+import javafx.scene.paint.Color;
 
 public class Material {
     private SimArea sim;
     private String name;
-    private String color;
+    private Color color;
     private boolean isSolid;
     private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids 
     private int curLayer;  //so you don't get huge stacks of water or something. curLayer tracks the layer.
@@ -19,8 +20,9 @@ public class Material {
     private Material left = null; //These will need to actually have ways to be found later.
     private Material right = null;//It might work just by checking what's in a spot x or y in the next direction,
     private Material below = null;//otherwise, we might be able to just check what an edge touches.
+    private boolean moved;
 
-    public Material(SimArea sim, String name, String color, int maxLayers, long vSpeed, int spikeHeight, int x, int y, boolean isSolid){
+    public Material(SimArea sim, String name, Color color, int maxLayers, long vSpeed, int spikeHeight, int x, int y, boolean isSolid){
         this.sim = sim;
         this.name = name;
         this.color = color;
@@ -30,12 +32,14 @@ public class Material {
         this.x = x;
         this.y = y;
         this.isSolid = isSolid;
+        this.moved = false;
     }
 
     //TODO: Work on this
     public void fall(){
-        while(getY()<720 && sim.getMaterial(x, y+1) == null && !sim.getMaterial(x, y+1).isSolid()){//second part will need to be refined to be
+        if (y < sim.getYLen() -1 && (sim.getMaterial(x, y+1) == null || !sim.getMaterial(x, y+1).isSolid())){//second part will need to be refined to be
             setY(y+1);                                        //not solid.
+            System.out.println(y);
         }
     }
 
@@ -48,7 +52,7 @@ public class Material {
     }
 
     public int getcurLayer(){
-        if(getY()==720)
+        if(getY()==sim.getYLen())
             return 1;
         else{
             return sim.getMaterial(x, y+1).getcurLayer()+1;
@@ -108,5 +112,17 @@ public class Material {
     }
     public void moveUp(){
         setX(y-1);    
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public boolean moved() {
+        return moved;
+    }
+
+    public void setMoved(boolean moved) {
+        this.moved = moved;
     }
 }

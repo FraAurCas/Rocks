@@ -1,9 +1,10 @@
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
+import javafx.scene.paint.Color;
 
 public class Dirt extends Material implements LooseSolid{
     public Dirt(SimArea sim, int x, int y) {
-        super(sim, "Dirt", "Brown", 3, 30, 3, x, y, true);
+        super(sim, "Dirt", Color.BROWN, 3, 30, 3, x, y, true);
 
     }
 

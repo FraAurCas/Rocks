@@ -12,7 +12,23 @@ public class SimArea {
     }
 
     public void simulate() { //Looped code
-
+        for (int x = 0; x < X_LEN; x++) {
+            for (int y = 0; y < Y_LEN; y++) {
+                Material m = world[x][y];
+                if (m != null && !m.moved()) {
+                    m.fall();
+                    m.setMoved(true);
+                }
+            }
+        }
+        
+        for (int x = 0; x < X_LEN; x++) {
+            for (int y = 0; y < Y_LEN; y++) {
+                if (world[x][y] != null) {
+                    world[x][y].setMoved(false);
+                }
+            }
+        }
     }
 
     /**
