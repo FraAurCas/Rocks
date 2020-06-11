@@ -10,7 +10,7 @@ public class Material {
     private boolean isSolid;
     private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids 
     private int curLayer;  //so you don't get huge stacks of water or something. curLayer tracks the layer.
-    private long vSpeed; //should be the amount of milliseconds between movements
+    private long vSpeed; //should be the amount of milliseconds between movements make zero for now
     private int spikeHeight;
     private int curSpikeHeight;
     private int mass; //controls the fall speed of the material
@@ -40,7 +40,7 @@ public class Material {
     //TODO: Work on this
     public boolean fall(){
         if (y < sim.getYLen() -1 && (sim.getMaterial(x, y+1) == null || !sim.getMaterial(x, y+1).isSolid())){//second part will need to be refined to be
-            setY(y+1);                                 //not solid.
+            moveDown();                                 //not solid.
             return true;
             //System.out.println(y);
         }
@@ -116,7 +116,7 @@ public class Material {
         sim.changeMatPos(this, x, y, d, y);
         x=d;
     }
-
+//Make the following account for edges
     public void moveRight(){
         setX(x+1);    
     }
@@ -124,10 +124,10 @@ public class Material {
         setX(x-1);    
     }
     public void moveDown(){
-        setX(y+1);    
+        setY(y+1);    
     }
     public void moveUp(){
-        setX(y-1);    
+        setY(y-1);    
     }
 
     public Color getColor() {
@@ -140,5 +140,11 @@ public class Material {
 
     public void setMoved(boolean moved) {
         this.moved = moved;
+    }
+    public int getXBounds(){
+        return sim.getXLen();
+    }
+    public int getYBounds(){
+        return sim.getYLen();
     }
 }

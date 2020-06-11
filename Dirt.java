@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 public class Dirt extends Material implements LooseSolid{
     public Dirt(SimArea sim, int x, int y) {
-        super(sim, "Dirt", Color.BROWN, 3, 30, 3, x, y, true);
+        super(sim, "Dirt", Color.BROWN, 3, 0, 3, x, y, true);
 
     }
     @Override
@@ -90,20 +90,20 @@ public class Dirt extends Material implements LooseSolid{
                     //why does it make me do this, we don't need it >:((((
                 }
                 if(currentPixel.getLeft() == null && currentPixel.getRight() == null){
-                   if(Math.random()>0.5){
-                        setX(getX()-1);
+                    if(Math.random()>0.5){
+                       moveLeft();
                     
                     }
                    else{
-                        setX(getX()+1);
+                       moveRight();
                    }
                 }
                 else{
                     if(currentPixel.getLeft()== null){
-                        setX(getX()-1);
+                        moveLeft();
                     }
                     else if (currentPixel.getRight()== null){
-                        setX(getX()+1);
+                        moveRight();
                     }
                 }
             }
