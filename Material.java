@@ -22,7 +22,7 @@ public class Material {
     private Material below = null;//otherwise, we might be able to just check what an edge touches.
     private boolean moved;
 
-    public Material(SimArea sim, String name, Color color, int maxLayers, long vSpeed, int spikeHeight, int x, int y, boolean isSolid){
+    public Material(SimArea sim, String name, Color color, int maxLayers, long vSpeed, int spikeHeight, int x, int y, boolean isSolid, int density){
         this.sim = sim;
         this.name = name;
         this.color = color;
@@ -33,7 +33,9 @@ public class Material {
         this.y = y;
         this.isSolid = isSolid;
         this.moved = false;
+        this.density = density;
     }
+    //public Material(SimArea sim, String name, Color color, int )
     public void level(){
         
     }
@@ -54,16 +56,24 @@ public class Material {
         return isSolid;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public int getmaxLayers(){
         return maxLayers;
     }
 
-    public int getcurLayer(){
+    public int getcurLayer(String name){
         if(getY()==sim.getYLen()-1)
             return 1;
-        else{
-            return (getBelow().getcurLayer()+1);
+        else if (getBelow().getName() == name){
+            return (getBelow().getcurLayer(name)+1);
         }
+        else {
+            return 1;
+        }
+
     }
 
     public long getvSpeed(){

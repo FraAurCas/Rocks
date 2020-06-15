@@ -1,3 +1,5 @@
 public interface Liquid{
-    public void levelV(int maxLayers, int curLayer); //V is for "verb"
+    public void levelV();
+    public void levelV(Material movingPixel, int maxLayers, int curLayer, Material currentPixel, int spikeHeight, int curSpikeHeight); //V is for "verb"
+
 }
