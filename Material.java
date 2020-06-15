@@ -71,11 +71,15 @@ public class Material {
     }
 
     public Material getLeft(){
-        return sim.getMaterial(getX()-1, getY());
+        if(getX()>0)
+            return sim.getMaterial(getX()-1, getY());
+        return null;
     }
 
     public Material getRight(){
-        return sim.getMaterial(getX()+1, getY());
+        if(getX()<getXBounds()-1)
+            return sim.getMaterial(getX()+1, getY());
+        return null;
     }
 
     public Material getBelow(){
@@ -118,10 +122,12 @@ public class Material {
     }
 //Make the following account for edges
     public void moveRight(){
-        setX(x+1);    
+        if(getX()<getXBounds()-1)
+            setX(x+1);    
     }
     public void moveLeft(){
-        setX(x-1);    
+        if(getX()>0)
+            setX(x-1);    
     }
     public void moveDown(){
         setY(y+1);    
