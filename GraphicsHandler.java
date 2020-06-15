@@ -25,7 +25,7 @@ public class GraphicsHandler extends Application{
                 pane.setOnMouseClicked(e -> {
                     int x = (int)e.getX()/20;
                     int y = (int)e.getY()/20;
-                    sim.add(new Dirt(sim, x, y), x, y);
+                    sim.add(new Water(sim, x, y), x, y);
                 });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);
 

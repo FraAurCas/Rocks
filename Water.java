@@ -2,11 +2,11 @@ import javafx.scene.paint.Color;
 
 public class Water extends Material implements Liquid{
     public Water(SimArea sim, int x, int y){
-        super(sim, "Water", Color.SKYBLUE, 3, 0, 0, x, y, false, 3);
+        super(sim, "Water", Color.SKYBLUE, 3, 0, 1, x, y, false, 3);
     }
     @Override
     public void level(){
-        if(fall())
+        if(fallLiquid())
             ;
         else
             levelV();
@@ -19,7 +19,7 @@ public class Water extends Material implements Liquid{
         
         if(currentPixel.getcurLayer(getName()) == 1)
             {}
-        else if(currentPixel.getLeft() == null || currentPixel.getRight() == null){
+        else if((currentPixel.getLeft() == null || currentPixel.getRight() == null) || (curSpikeHeight >= spikeHeight)){
             //System.out.println("\n\ncurspikeheight: "+ curSpikeHeight+"\nspikeHeight: "+spikeHeight+"\ncurpixellayer: "+currentPixel.getcurLayer());
             if(getcurLayer(getName()) >= getmaxLayers){
                 // try{
