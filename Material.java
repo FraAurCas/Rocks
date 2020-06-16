@@ -41,7 +41,7 @@ public class Material {
     }
     //TODO: Work on this
     public boolean fall(){
-        if (y < sim.getYLen() -1 && (sim.getMaterial(x, y+1) == null || !sim.getMaterial(x, y+1).isSolid())){//second part will need to be refined to be
+        if (y < sim.getYLen() -1 && (getBelow() == null || !getBelow().isSolid())){//second part will need to be refined to be
             moveDown();                                 //not solid.
             return true;
             //System.out.println(y);
@@ -52,13 +52,13 @@ public class Material {
         }
     }
     public boolean fallLiquid(){
-        if (y < sim.getYLen() -1 && (sim.getMaterial(x, y+1) == null)){//second part will need to be refined to be
+        if (y < sim.getYLen() -1 && (getBelow() == null)){//second part will need to be refined to be
             moveDown();                                 //not solid.
             return true;
             //System.out.println(y);
         }
         else{
-            //System.out.println("Layer: " + getcurLayer() + "\nSpike: " + getcurSpikeHeight());
+            System.out.println("Layer: " + getcurLayer("Water"));
             return false;
         }
     }
@@ -104,7 +104,9 @@ public class Material {
     }
 
     public Material getBelow(){
-        return sim.getMaterial(getX(), getY()+1);
+        if(getY()<getYBounds()-1)
+            return sim.getMaterial(getX(), getY()+1);
+        return null;
     }
 
     public int getspikeHeight(){

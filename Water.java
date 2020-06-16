@@ -6,13 +6,15 @@ public class Water extends Material implements Liquid{
     }
     @Override
     public void level(){
-        if(fallLiquid())
-            ;
-        else
+        // if(fallLiquid())
+        //     ;
+        // else
             levelV();
     }
     public void levelV(){
-        if(getcurLayer(getName()) == 1){
+        if(getBelow()==null)
+            fall();
+        else if(getY()==getYBounds()-1){
             if(getRight() == null && getLeft() == null){
             if(Math.random()>0.5){
                 moveLeft();
@@ -32,5 +34,36 @@ public class Water extends Material implements Liquid{
                 moveRight();
             }
         }
+        else if (getBelow().getLeft() == null)
+            moveLeft();
+        else if (getBelow().getRight()==null)
+            moveRight();
+ 
+        else if (getBelow().getRight().getRight() == null && getBelow().getLeft().getLeft() == null){
+            if(Math.random()>0.5){
+                moveLeft();
+                moveLeft();
+             
+            }
+        else{
+            moveRight();
+            moveRight();
+            }
+        }
+        else if (getBelow().getLeft().getLeft() == null)
+{            moveLeft();
+            moveLeft();}
+              else if (getBelow().getRight().getRight()==null){
+            moveRight();
+            moveRight();}
+        // else if(getRight() == null && getLeft() == null){
+        //     if(Math.random()>0.5){
+        //         moveLeft();
+             
+        //      }
+        //     else{
+        //         moveRight();
+        //     }
+        // }
     }
 }
