@@ -1,11 +1,16 @@
 import javafx.animation.*;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
+import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
 
@@ -19,20 +24,45 @@ public class GraphicsHandler extends Application{
 
         SimArea sim = new SimArea(X_LEN, Y_LEN);
 
+        ObservableList<String> materials = 
+            FXCollections.observableArrayList( //New material names need to be added here. Also need to be added in the switch statement
+                "Dirt",
+                "Water"
+            );
+        final ComboBox selection = new ComboBox(materials);
+        selection.setValue("Dirt");
+
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
             Pane pane = new Pane();            //Where the actual simulation occurs. 
                 pane.setPickOnBounds(true);
                 pane.setOnMouseClicked(e -> {
                     int x = (int)e.getX()/20;
                     int y = (int)e.getY()/20;
-                    sim.add(new Water(sim, x, y), x, y);
+                    Material m = null;
+
+                    switch ((String)selection.getValue()) {
+                        case "Dirt":
+                            m = new Dirt(sim, x, y);
+                            break;
+                        case "Water":
+                            m = new Water(sim, x, y);
+                            break;
+                    }
+
+                    sim.add(m, x, y);
                 });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);
+                pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
 
-            HBox hbox = new HBox();             //Will be used to add buttons and things later
+            HBox hbox = new HBox();             //Will be used to add buttons and things later                
+                hbox.getChildren().addAll(new Text("Material: "), selection);
+                hbox.setPadding(new Insets(20, 60, 20, 60));
+                hbox.setSpacing(10);
         vbox.getChildren().addAll(pane, hbox);
+        vbox.setPadding(new Insets(20, 20, 20, 20));
 
-        final Scene scene = new Scene(vbox, 1280, 720); //Display setup. Numbers are display resolution
+        final Scene scene = new Scene(vbox); //Display setup
+        primaryStage.setResizable(false);    //Don't resize cause thats a lot of work
         primaryStage.setTitle("Rocks");                 //Title
         primaryStage.setScene(scene);
         primaryStage.show();
