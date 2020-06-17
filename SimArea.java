@@ -8,7 +8,7 @@ public class SimArea {
     public SimArea(int x, int y) {
         X_LEN = x;
         Y_LEN = y;
-        world = new Material[x][y];
+        world = new Material[x+1][y+1];
     }
 
     public void simulate() { //Looped code
@@ -58,6 +58,24 @@ public class SimArea {
         Material temp = world[x][y];
         world[x][y] = m;
         return temp;
+    }
+
+    public void swap(Material m, Material n){
+        int mx = m.getX();
+        int my = m.getY();
+        int nx = n.getX();
+        int ny = n.getY();
+        world[getXLen()][getYLen()] = m;
+        m.setX(getXLen());
+        m.setY(getYLen());
+        world[mx][my] = n;
+        n.setX(mx);
+        n.setY(my);
+        world[n.getX()][n.getY()] = n;
+        m.setX(nx);
+        m.setY(ny);
+        m.setMoved(true);
+        n.setMoved(true);
     }
 
     public int getXLen() {

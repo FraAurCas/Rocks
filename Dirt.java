@@ -2,7 +2,7 @@ import javafx.scene.paint.Color;
 
 public class Dirt extends Material implements LooseSolid{
     public Dirt(SimArea sim, int x, int y) {
-        super(sim, "Dirt", Color.BROWN, 3, 0, 3, x, y, true, 6);
+        super(sim, "Dirt", Color.BROWN, 3, 0, 3, x, y, 6);
 
     }
     @Override
