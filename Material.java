@@ -149,12 +149,24 @@ public class Material {
     }
 //Make the following account for edges
     public void moveRight(){
-        if(getX()<getXBounds()-1)
+        if(getX()<getXBounds()-1){
+            if(getRight()!=null && getLeft().getDensity()<getDensity()){
+                sim.swap(this, getRight());
+            }
+            else{
             setX(x+1);    
+            }
+        }
     }
     public void moveLeft(){
-        if(getX()>0)
-            setX(x-1);    
+        if(getX()>0){
+            if(getLeft()!=null && getLeft().getDensity()<getDensity()){
+                sim.swap(this, getLeft());
+            }
+            else{
+            setX(x-1);
+            }    
+        }
     }
     public void moveDown(){
         setY(y+1);    

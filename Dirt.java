@@ -111,6 +111,39 @@ public class Dirt extends Material implements LooseSolid{
                 }
             }
         }
+        else if(currentPixel.getLeft().getDensity()<getDensity() || currentPixel.getRight().getDensity()<getDensity()){
+            //System.out.println("\n\ncurspikeheight: "+ curSpikeHeight+"\nspikeHeight: "+spikeHeight+"\ncurpixellayer: "+currentPixel.getcurLayer());
+            if(curSpikeHeight >= spikeHeight){
+                // try{
+                //     Thread.sleep(getvSpeed());
+                // }
+                // catch(InterruptedException ex){
+                //     //why does it make me do this, we don't need it >:((((
+                // }
+                if(currentPixel.getLeft().getDensity()<getDensity() && currentPixel.getRight().getDensity()<getDensity()){
+                    if(Math.random()>0.5){
+                       moveLeft();
+                    
+                    }
+                   else{
+                        moveRight();
+                   }
+                }
+                else{
+                    if(currentPixel.getLeft().getDensity()<getDensity()){
+                        moveLeft();
+                    }
+                    else if (currentPixel.getRight().getDensity()<getDensity()){
+                        moveRight();
+                    }
+                }
+            }
+            else{
+                if(currentPixel.getBelow() != null){
+                    levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(getName()), currentPixel.getBelow(), spikeHeight, curSpikeHeight+1);
+                }
+            }
+        }
         else{
             if(currentPixel.getBelow() != null){
             levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(getName()), currentPixel.getBelow(), spikeHeight, curSpikeHeight+1);
