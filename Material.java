@@ -4,7 +4,7 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
 
 public class Material {
-    private SimArea sim;
+    protected SimArea sim;
     private String name;
     private Color color;
     private boolean isSolid;
