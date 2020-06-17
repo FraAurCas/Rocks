@@ -27,7 +27,8 @@ public class GraphicsHandler extends Application{
         ObservableList<String> materials = 
             FXCollections.observableArrayList( //New material names need to be added here. Also need to be added in the switch statement
                 "Dirt",
-                "Water"
+                "Water",
+                "Custom (WIP)"
             );
         final ComboBox selection = new ComboBox(materials);
         selection.setValue("Dirt");
@@ -47,6 +48,8 @@ public class GraphicsHandler extends Application{
                         case "Water":
                             m = new Water(sim, x, y);
                             break;
+                        case "Custon (WIP)":
+                            return;
                     }
 
                     sim.add(m, x, y);
