@@ -8,7 +8,7 @@ public class Material {
     private String name;
     private Color color;
     private boolean isSolid;
-    private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids 
+    private int maxLayers; //maxLayers is replacing vHeight. It will only be used for liquids
     private int curLayer;  //so you don't get huge stacks of water or something. curLayer tracks the layer.
     private long vSpeed; //should be the amount of milliseconds between movements make zero for now
     private int spikeHeight;
@@ -37,7 +37,7 @@ public class Material {
     }
     //public Material(SimArea sim, String name, Color color, int )
     public void level(){
-        
+
     }
     //TODO: Work on this
     public boolean fall(){
@@ -153,8 +153,12 @@ public class Material {
             if(getRight()!=null && getLeft().getDensity()<getDensity()){
                 sim.swap(this, getRight());
             }
+            if(getRight()!=null && getRight().getName()==getName()){ //this should only be when doing something like pushing water out from the bottom in Liquid
+              sim.swap(this, getRight());
+              moveRight();
+            }
             else{
-            setX(x+1);    
+            setX(x+1);
             }
         }
     }
@@ -165,14 +169,14 @@ public class Material {
             }
             else{
             setX(x-1);
-            }    
+            }
         }
     }
     public void moveDown(){
-        setY(y+1);    
+        setY(y+1);
     }
     public void moveUp(){
-        setY(y-1);    
+        setY(y-1);
     }
 
     public Color getColor() {

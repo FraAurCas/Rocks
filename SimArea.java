@@ -21,7 +21,7 @@ public class SimArea {
                 }
             }
         }
-        
+
         for (int x = 0; x < X_LEN; x++) {
             for (int y = 0; y < Y_LEN; y++) {
                 if (world[x][y] != null) {
@@ -32,7 +32,7 @@ public class SimArea {
     }
 
     /**
-     * Returns the material at the given location. Throws ArrayIndexOutOfBoundsException if x or y are to large for 
+     * Returns the material at the given location. Throws ArrayIndexOutOfBoundsException if x or y are to large for
      * the game board.
      * @param x
      * @param y
@@ -43,9 +43,9 @@ public class SimArea {
             throw new ArrayIndexOutOfBoundsException(x + ", " + y + " does not exist within the game board");
         return world[x][y];
     }
-    
+
     /**
-     * Puts a new material on the board a the specified location. Returns the material formerly there. Throws 
+     * Puts a new material on the board a the specified location. Returns the material formerly there. Throws
      * ArrayIndexOutOfBoundsException if x or y are to large for the game board.
      * @param m
      * @param x
@@ -65,6 +65,15 @@ public class SimArea {
         int my = m.getY();
         int nx = n.getX();
         int ny = n.getY();
+
+      /*  m.setX(nx);
+        m.setY(ny);
+
+        n.setX(mx);
+        n.setY(my);
+*/
+
+
         world[getXLen()][getYLen()] = m;
         m.setX(getXLen());
         m.setY(getYLen());
@@ -74,6 +83,8 @@ public class SimArea {
         world[n.getX()][n.getY()] = n;
         m.setX(nx);
         m.setY(ny);
+
+
         m.setMoved(true);
         n.setMoved(true);
     }

@@ -1,6 +1,6 @@
 import javafx.scene.paint.Color;
 
-public class Water extends Material implements Liquid{
+public class Water extends Liquid{
     public Water(SimArea sim, int x, int y){
         super(sim, "Water", Color.SKYBLUE, 3, 0, 1, x, y, 3);
     }
@@ -31,13 +31,13 @@ public class Water extends Material implements Liquid{
                     }
                     m = sim.getMaterial(getX() - checkLen, getY() + 1);
                     if (m == null) {
-                        for (int i = 0; i < checkLen; i++) 
+                        for (int i = 0; i < checkLen; i++)
                             moveLeft();
                         levelV();
                         return;
                     }
                 }
-                
+
                 if (getX() + checkLen < getXBounds() && !isBoundedRight) {
                     if (sim.getMaterial(getX() + checkLen, getY()) != null) {
                         isBoundedRight = true;
@@ -45,14 +45,14 @@ public class Water extends Material implements Liquid{
                     }
                     m = sim.getMaterial(getX() + checkLen, getY() + 1);
                     if (m == null) {
-                        for (int i = 0; i < checkLen; i++) 
+                        for (int i = 0; i < checkLen; i++)
                             moveRight();
                         levelV();
                         return;
                     }
                 }
 
-                if (checkLen > getXBounds()) 
+                if (checkLen > getXBounds())
                     break;
                 checkLen++;
             }
@@ -67,7 +67,7 @@ public class Water extends Material implements Liquid{
 //             if(getRight() == null && getLeft() == null){
 //             if(Math.random()>0.5){
 //                 moveLeft();
-             
+
 //              }
 //             else{
 //                 moveRight();
@@ -77,7 +77,7 @@ public class Water extends Material implements Liquid{
 //         else if (getBelow().getRight() == null && getBelow().getLeft() == null){
 //             if(Math.random()>0.5){
 //                 moveLeft();
-             
+
 //              }
 //             else{
 //                 moveRight();
@@ -87,12 +87,12 @@ public class Water extends Material implements Liquid{
 //             moveLeft();
 //         else if (getBelow().getRight()==null)
 //             moveRight();
- 
+
 //         else if (getBelow().getRight().getRight() == null && getBelow().getLeft().getLeft() == null){
 //             if(Math.random()>0.5){
 //                 moveLeft();
 //                 moveLeft();
-             
+
 //             }
 //         else{
 //             moveRight();
@@ -108,7 +108,7 @@ public class Water extends Material implements Liquid{
 //         // else if(getRight() == null && getLeft() == null){
 //         //     if(Math.random()>0.5){
 //         //         moveLeft();
-             
+
 //         //      }
 //         //     else{
 //         //         moveRight();
