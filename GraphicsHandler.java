@@ -13,18 +13,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
+import javafx.scene.input.MouseEvent;
 
 public class GraphicsHandler extends Application{
     public void start(Stage primaryStage){
 
         final int FPS = 60;
-        final int X_LEN = 60; //How many spaces wide the world is
-        final int Y_LEN = 40; //How many spaces tall the world is
-        final int EDGE_LEN = 20; //How many pixels each material is graphically displayed as
+        final int X_LEN = 300; //How many spaces wide the world is
+        final int Y_LEN = 200; //How many spaces tall the world is
+        final int EDGE_LEN = 5; //How many pixels each material is graphically displayed as
 
         SimArea sim = new SimArea(X_LEN, Y_LEN);
 
-        ObservableList<String> materials = 
+        ObservableList<String> materials =
             FXCollections.observableArrayList( //New material names need to be added here. Also need to be added in the switch statement
                 "Dirt",
                 "Water",
@@ -34,30 +35,38 @@ public class GraphicsHandler extends Application{
         selection.setValue("Dirt");
 
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
-            Pane pane = new Pane();            //Where the actual simulation occurs. 
+            Pane pane = new Pane();            //Where the actual simulation occurs.
                 pane.setPickOnBounds(true);
                 pane.setOnMouseClicked(e -> {
-                    int x = (int)e.getX()/20;
-                    int y = (int)e.getY()/20;
-                    Material m = null;
 
-                    switch ((String)selection.getValue()) {
-                        case "Dirt":
-                            m = new Dirt(sim, x, y);
-                            break;
-                        case "Water":
-                            m = new Water(sim, x, y);
-                            break;
-                        case "Custon (WIP)":
-                            return;
+
+                    while (e.isPrimaryButtonDown()) {
+                      System.out.println("Ayo");
+                      long initTime = System.currentTimeMillis();
+                      if ( (System.currentTimeMillis() - initTime) % (1000 / FPS) == 0 ) {
+                        int x = (int)e.getX()/EDGE_LEN;
+                        int y = (int)e.getY()/EDGE_LEN;
+                        Material m = null;
+
+                        switch ((String)selection.getValue()) {
+                            case "Dirt":
+                                m = new Dirt(sim, x, y);
+                                break;
+                            case "Water":
+                                m = new Water(sim, x, y);
+                                break;
+                            case "Custon (WIP)":
+                                return;
+                        }
+
+                        sim.add(m, x, y);
+                      }
                     }
-
-                    sim.add(m, x, y);
                 });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);
                 pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
 
-            HBox hbox = new HBox();             //Will be used to add buttons and things later                
+            HBox hbox = new HBox();             //Will be used to add buttons and things later
                 hbox.getChildren().addAll(new Text("Material: "), selection);
                 hbox.setPadding(new Insets(20, 60, 20, 60));
                 hbox.setSpacing(10);
@@ -90,7 +99,7 @@ public class GraphicsHandler extends Application{
         loop.play();
     }
 
-    public static void main(final String[] args) { 
+    public static void main(final String[] args) {
         launch(args);
     };
 }

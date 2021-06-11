@@ -82,6 +82,9 @@ public class Material {
     public int getcurLayer(String name){
         if(getY()==sim.getYLen()-1)
             return 1;
+        else if(getBelow() == null){
+          return 1;
+        }
         else if (getBelow().getName() == name){
             return (getBelow().getcurLayer(name)+1);
         }
@@ -150,13 +153,12 @@ public class Material {
 //Make the following account for edges
     public void moveRight(){
         if(getX()<getXBounds()-1){
-            if(getRight()!=null && getLeft().getDensity()<getDensity()){
+            if(getRight()!=null && getRight().getDensity()<getDensity()){
                 sim.swap(this, getRight());
             }
-            if(getRight()!=null && getRight().getName()==getName()){ //this should only be when doing something like pushing water out from the bottom in Liquid
+            /*if(getRight()!=null && getRight().getName()==getName()){ //this should only be when doing something like pushing water out from the bottom in Liquid
               sim.swap(this, getRight());
-              moveRight();
-            }
+            }*/
             else{
             setX(x+1);
             }

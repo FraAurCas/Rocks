@@ -28,7 +28,7 @@ public class LooseSolid extends Material{
 
         if(currentPixel.getcurLayer(currentPixel.getName()) == 1)
             {}
-        else if(currentPixel.getLeft() == null || currentPixel.getRight() == null){
+        else if(currentPixel.getLeft() == null || currentPixel.getRight() == null) {
             //System.out.println("\n\ncurspikeheight: "+ curSpikeHeight+"\nspikeHeight: "+spikeHeight+"\ncurpixellayer: "+currentPixel.getcurLayer());
             if(curSpikeHeight >= spikeHeight) {
                 attemtMoveLeftRight(currentPixel, curSpikeHeight, spikeHeight);
@@ -41,27 +41,26 @@ public class LooseSolid extends Material{
 
         else if(currentPixel.getLeft().getDensity()<getDensity() || currentPixel.getRight().getDensity()<getDensity())  {
             //System.out.println("\n\ncurspikeheight: "+ curSpikeHeight+"\nspikeHeight: "+spikeHeight+"\ncurpixellayer: "+currentPixel.getcurLayer());
-            if(curSpikeHeight >= spikeHeight){
-
-                if(currentPixel.getLeft().getDensity()<getDensity() && currentPixel.getRight().getDensity()<getDensity()){
-                    if(Math.random()>0.5){
-                       moveLeft();
-
+            if(curSpikeHeight >= spikeHeight){ //If the spike is too high
+                if(currentPixel.getLeft().getDensity() < getDensity() && currentPixel.getRight().getDensity()<getDensity()) { //If we can push both sides
+                    if(Math.random()>0.5) {
+                        moveLeft();
                     }
-                   else{
+                    else  {
                         moveRight();
                    }
                 }
-                else{
-                    if(currentPixel.getLeft().getDensity()<getDensity()){
+                else { //One side logic
+                    if(currentPixel.getLeft().getDensity() < getDensity()) {
                         moveLeft();
                     }
-                    else if (currentPixel.getRight().getDensity()<getDensity()){
+                    else if (currentPixel.getRight().getDensity() < getDensity()) {
                         moveRight();
                     }
                 }
             }
-            else{
+
+            else { //Fall
                 if(currentPixel.getBelow() != null){
                     levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(getName()), currentPixel.getBelow(), spikeHeight, curSpikeHeight+1);
                 }
