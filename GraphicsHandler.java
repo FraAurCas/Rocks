@@ -37,30 +37,33 @@ public class GraphicsHandler extends Application{
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
             Pane pane = new Pane();            //Where the actual simulation occurs.
                 pane.setPickOnBounds(true);
-                pane.setOnMouseClicked(e -> {
+                pane.setOnMousePressed(e -> {
 
 
-                    while (e.isPrimaryButtonDown()) {
+                    if (e.isPrimaryButtonDown()) {
+                      int x = (int)e.getX()/EDGE_LEN;
+                      int y = (int)e.getY()/EDGE_LEN;
                       System.out.println("Ayo");
-                      long initTime = System.currentTimeMillis();
-                      if ( (System.currentTimeMillis() - initTime) % (1000 / FPS) == 0 ) {
-                        int x = (int)e.getX()/EDGE_LEN;
-                        int y = (int)e.getY()/EDGE_LEN;
-                        Material m = null;
+                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5000/60), (ActionEvent event) -> {
 
-                        switch ((String)selection.getValue()) {
-                            case "Dirt":
-                                m = new Dirt(sim, x, y);
-                                break;
-                            case "Water":
-                                m = new Water(sim, x, y);
-                                break;
-                            case "Custon (WIP)":
-                                return;
-                        }
+                      Material m = null;
 
-                        sim.add(m, x, y);
+                      switch ((String)selection.getValue()) {
+                          case "Dirt":
+                              m = new Dirt(sim, x, y);
+                              break;
+                          case "Water":
+                              m = new Water(sim, x, y);
+                              break;
+                          case "Custom (WIP)":
+                              return;
                       }
+                      sim.add(m, x, y);
+
+                      }));
+                      timeline.setCycleCount(Timeline.INDEFINITE);
+                      timeline.play();
+
                     }
                 });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);
