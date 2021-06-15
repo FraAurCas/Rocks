@@ -16,7 +16,33 @@ public class Liquid extends Material{
           boolean isBoundedRight = false;
           while (true) {
               Material m;
-
+              if((getX() - checkLen >= 0 && !isBoundedLeft)&&(getX() + checkLen < getXBounds() && !isBoundedRight)){
+                if(Math.random() > 0.5) {
+                  if (sim.getMaterial(getX() - checkLen, getY()) != null) {
+                      isBoundedLeft = true;
+                      continue;
+                  }
+                  m = sim.getMaterial(getX() - checkLen, getY() + 1);
+                  if (m == null) {
+                      for (int i = 0; i < checkLen; i++)
+                          moveLeft();
+                      levelV();
+                      return;
+                  }
+                } else {
+                  if (sim.getMaterial(getX() + checkLen, getY()) != null) {
+                      isBoundedRight = true;
+                      continue;
+                  }
+                  m = sim.getMaterial(getX() + checkLen, getY() + 1);
+                  if (m == null) {
+                      for (int i = 0; i < checkLen; i++)
+                          moveRight();
+                      levelV();
+                      return;
+                  }
+                }
+              }
               if (getX() - checkLen >= 0 && !isBoundedLeft) {
                   if (sim.getMaterial(getX() - checkLen, getY()) != null) {
                       isBoundedLeft = true;

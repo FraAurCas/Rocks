@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
 import javafx.scene.input.MouseEvent;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class GraphicsHandler extends Application{
     public void start(Stage primaryStage){
@@ -37,56 +38,86 @@ public class GraphicsHandler extends Application{
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
             Pane pane = new Pane();            //Where the actual simulation occurs.
                 pane.setPickOnBounds(true);
-
-
-
-                pane.setOnMousePressed(e -> {
+/*                pane.setOnMousePressed(e -> {
 
 
                     if (e.isPrimaryButtonDown()) {
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
-                      System.out.println("Ayo");
-                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500/60), (ActionEvent event) -> {
+                    //  System.out.println("Ayo");
+                      //Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000/60), (ActionEvent event) -> {
 
                       Material m = null;
 
                       switch ((String)selection.getValue()) {
                           case "Dirt":
-                              m = new Dirt(sim, x, y);
+                              m = new Dirt(sim, (int)e.getX()/EDGE_LEN, (int)e.getY()/EDGE_LEN);
                               break;
                           case "Water":
-                              m = new Water(sim, x, y);
+                              m = new Water(sim, (int)e.getX()/EDGE_LEN, (int)e.getY()/EDGE_LEN);
                               break;
                           case "Custom (WIP)":
                               return;
                       }
                       sim.add(m, x, y);
 
-                      }));
-                      timeline.setCycleCount(25);
-                      timeline.play();
+                      //}));
+                      //timeline.setCycleCount(Timeline.INDEFINITE);
+                      //timeline.play();
 
                     }
-                    else if (e.isSecondaryButtonDown()){
-                      int x = (int)e.getX()/EDGE_LEN;
-                      int y = (int)e.getY()/EDGE_LEN;
-                      System.out.println("Ayo");
-                      Material m = null;
 
-                      switch ((String)selection.getValue()) {
-                          case "Dirt":
-                              m = new Dirt(sim, x, y);
-                              break;
-                          case "Water":
-                              m = new Water(sim, x, y);
-                              break;
-                          case "Custom (WIP)":
-                              return;
-                      }
-                      sim.add(m, x, y);
-                    }
                 });
+                */
+
+                SimpleBooleanProperty simpleBooleanProperty = new SimpleBooleanProperty();
+
+            pane.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    simpleBooleanProperty.setValue(true);
+                }
+            });
+
+            pane.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    simpleBooleanProperty.setValue(false);
+                }
+            });
+
+
+            pane.setOnMouseMoved(new EventHandler<MouseEvent>() {
+                @Override
+
+                public void handle(MouseEvent event) {
+                    System.out.println('a');
+                if(simpleBooleanProperty.getValue()){
+                  System.out.println('b');
+                  int x = (int)event.getX()/EDGE_LEN;
+                  int y = (int)event.getY()/EDGE_LEN;
+
+                  Material m = null;
+
+                  switch ((String)selection.getValue()) {
+                      case "Dirt":
+                          m = new Dirt(sim, x, y);
+                          break;
+                      case "Water":
+                          m = new Water(sim, x, y);
+                          break;
+                      case "Custom (WIP)":
+                          return;
+                  }
+                  sim.add(m, x, y);
+
+                }
+                else{
+                  System.out.println('c');
+                }
+              }
+
+              });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);
                 pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
 
