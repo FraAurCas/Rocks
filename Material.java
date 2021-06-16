@@ -90,15 +90,15 @@ public class Material {
         }
 
         else if(getBelow() == null){
-          if(getLeft()!=null && getLeft().getName().equals(getName())){
+          /*if(getLeft()!=null && getLeft().getName().equals(getName())){
             return getLeft().getcurLayer(name);
           }
           else if(getRight()!=null && getRight().getName().equals(getName())){
             return getRight().getcurLayer(name);
           }
-          else{
+          else{*/
           return -10000;
-        }
+        //}
         }
         else if (getBelow().getName() == name){
             return (getBelow().getcurLayer(name)+1);

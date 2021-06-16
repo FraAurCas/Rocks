@@ -30,7 +30,7 @@ public class FirmSolid extends Material{
 
   public void levelV(Material movingPixel, int getmaxLayers, int getcurLayers, Material currentPixel, int spikeHeight, int curSpikeHeight){
 
-      if(currentPixel.getcurLayer(currentPixel.getName()) == 1)
+      if(currentPixel.getcurLayer(currentPixel.getName()) >=1)
           {}
             //if touching any of the same material and on the ground somehow
 
@@ -45,5 +45,30 @@ public class FirmSolid extends Material{
           levelV(movingPixel, super.getmaxLayers(), currentPixel.getcurLayer(getName()), currentPixel.getBelow(), spikeHeight, curSpikeHeight+1);
           }
       }
+  }
+  public int getcurLayer(String name){
+      if(getY()==sim.getYLen()-1){
+          return 1;}
+      else if(getY() == sim.getYLen()-1){
+        return 1;
+      }
+      else if(getBelow() == null){
+        if(getLeft()!=null && getLeft().getName().equals(getName())){
+          return 1;
+        }
+        else if(getRight()!=null && getRight().getName().equals(getName())){
+          return 1;
+        }
+        else{
+          return -10000;
+        }
+      }
+      else if (getBelow().getName() == name){
+          return (getBelow().getcurLayer(name)+1);
+      }
+      else {
+          return 1;
+      }
+
   }
 }

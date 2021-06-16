@@ -22,8 +22,8 @@ public class GraphicsHandler extends Application{
     public void start(Stage primaryStage){
 
         final int FPS = 60;
-        final int X_LEN = 300; //How many spaces wide the world is
-        final int Y_LEN = 200; //How many spaces tall the world is
+        final int X_LEN = 400; //How many spaces wide the world is
+        final int Y_LEN = 250; //How many spaces tall the world is
         final int EDGE_LEN = 5; //How many pixels each material is graphically displayed as
 
         SimArea sim = new SimArea(X_LEN, Y_LEN);
@@ -62,8 +62,8 @@ public class GraphicsHandler extends Application{
                     if (e.isSecondaryButtonDown()) {
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
-                      System.out.println("Ayo");
-                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4500/60), (ActionEvent event) -> {
+
+                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500/60), (ActionEvent event) -> {
 
                       Material m = null;
 
@@ -90,7 +90,7 @@ public class GraphicsHandler extends Application{
                     else if (e.isPrimaryButtonDown()){
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
-                      System.out.println("Ayo");
+
                       Material m = null;
 
                       switch ((String)selection.getValue()) {
