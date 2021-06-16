@@ -18,6 +18,7 @@ public class SimArea {
                 if (m != null && !m.moved()) {
                     m.level();
                     m.setMoved(true);
+                    m.setcurLayer(m.getcurLayer(m.getName()));
                 }
             }
         }
@@ -87,6 +88,10 @@ public class SimArea {
 
         m.setMoved(true);
         n.setMoved(true);
+    }
+    public void delete(int x, int y){
+
+      world[x][y] = null;
     }
 
     public int getXLen() {

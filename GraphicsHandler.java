@@ -29,6 +29,7 @@ public class GraphicsHandler extends Application{
             FXCollections.observableArrayList( //New material names need to be added here. Also need to be added in the switch statement
                 "Dirt",
                 "Water",
+                "Rock",
                 "Custom (WIP)"
             );
         final ComboBox selection = new ComboBox(materials);
@@ -43,7 +44,7 @@ public class GraphicsHandler extends Application{
                 pane.setOnMousePressed(e -> {
 
 
-                    if (e.isPrimaryButtonDown()) {
+                    if (e.isSecondaryButtonDown()) {
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
                       System.out.println("Ayo");
@@ -68,7 +69,7 @@ public class GraphicsHandler extends Application{
                       timeline.play();
 
                     }
-                    else if (e.isSecondaryButtonDown()){
+                    else if (e.isPrimaryButtonDown()){
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
                       System.out.println("Ayo");
@@ -81,10 +82,18 @@ public class GraphicsHandler extends Application{
                           case "Water":
                               m = new Water(sim, x, y);
                               break;
+                          case "Rock":
+                              m = new Rock(sim, x, y);
+                              break;
                           case "Custom (WIP)":
                               return;
                       }
                       sim.add(m, x, y);
+                    }
+                    else if (e.isMiddleButtonDown()){
+                      int x = (int)e.getX()/EDGE_LEN;
+                      int y = (int)e.getY()/EDGE_LEN;
+                      sim.delete(x, y);
                     }
                 });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);

@@ -79,11 +79,17 @@ public class Material {
         return maxLayers;
     }
 
+    public void setcurLayer(int layer){
+      curLayer = layer;
+    }
     public int getcurLayer(String name){
-        if(getY()==sim.getYLen()-1)
-            return 1;
-        else if(getBelow() == null){
+        if(getY()==sim.getYLen()-1){
+            return 1;}
+        else if(y == sim.getYLen()-1){
           return 1;
+        }
+        else if(getBelow() == null){
+          return -1;
         }
         else if (getBelow().getName() == name){
             return (getBelow().getcurLayer(name)+1);
@@ -113,6 +119,12 @@ public class Material {
     public Material getBelow(){
         if(getY()<getYBounds()-1)
             return sim.getMaterial(getX(), getY()+1);
+        return null;
+    }
+
+    public Material getAbove(){
+      if(getY()>0)
+        return sim.getMaterial(getX(), getY()-1);
         return null;
     }
 
