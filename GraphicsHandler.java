@@ -14,6 +14,9 @@ import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.*;
+import javafx.beans.value.*;
+
 
 public class GraphicsHandler extends Application{
     public void start(Stage primaryStage){
@@ -34,6 +37,18 @@ public class GraphicsHandler extends Application{
             );
         final ComboBox selection = new ComboBox(materials);
         selection.setValue("Dirt");
+
+        final TextField amount = new TextField();
+        amount.setText("25");
+        amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+            String newValue) {
+              if (!newValue.matches("\\d*")) {
+                amount.setText(newValue.replaceAll("[^\\d]", ""));
+              }
+            }
+        });
 
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
             Pane pane = new Pane();            //Where the actual simulation occurs.
@@ -68,7 +83,7 @@ public class GraphicsHandler extends Application{
                       sim.add(m, x, y);
 
                       }));
-                      timeline.setCycleCount(25);
+                      timeline.setCycleCount(Integer.parseInt(amount.getText()));
                       timeline.play();
 
                     }
@@ -103,7 +118,7 @@ public class GraphicsHandler extends Application{
                 pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
 
             HBox hbox = new HBox();             //Will be used to add buttons and things later
-                hbox.getChildren().addAll(new Text("Material: "), selection);
+                hbox.getChildren().addAll(new Text("Material: "), selection, new Text("Amount per right-click: "), amount);
                 hbox.setPadding(new Insets(20, 60, 20, 60));
                 hbox.setSpacing(10);
         vbox.getChildren().addAll(pane, hbox);

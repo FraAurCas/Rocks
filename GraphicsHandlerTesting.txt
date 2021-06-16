@@ -35,6 +35,9 @@ public class GraphicsHandler extends Application{
         final ComboBox selection = new ComboBox(materials);
         selection.setValue("Dirt");
 
+
+
+
         VBox vbox = new VBox();              //The main VBox, contains the visual display at top and GUI at bottom
             Pane pane = new Pane();            //Where the actual simulation occurs.
                 pane.setPickOnBounds(true);
@@ -122,7 +125,7 @@ public class GraphicsHandler extends Application{
                 pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
 
             HBox hbox = new HBox();             //Will be used to add buttons and things later
-                hbox.getChildren().addAll(new Text("Material: "), selection);
+                hbox.getChildren().addAll(new Text("Material: "), selection, new Text("Amount per left-click: "), amount);
                 hbox.setPadding(new Insets(20, 60, 20, 60));
                 hbox.setSpacing(10);
         vbox.getChildren().addAll(pane, hbox);
