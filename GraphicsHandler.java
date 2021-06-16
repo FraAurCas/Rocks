@@ -48,7 +48,7 @@ public class GraphicsHandler extends Application{
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
                       System.out.println("Ayo");
-                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500/60), (ActionEvent event) -> {
+                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4500/60), (ActionEvent event) -> {
 
                       Material m = null;
 
@@ -59,6 +59,9 @@ public class GraphicsHandler extends Application{
                           case "Water":
                               m = new Water(sim, x, y);
                               break;
+                          case "Rock":
+                            m = new Rock(sim, x, y);
+                            break;
                           case "Custom (WIP)":
                               return;
                       }
