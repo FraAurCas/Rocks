@@ -63,7 +63,7 @@ public class GraphicsHandler extends Application{
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
 
-                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500/60), (ActionEvent event) -> {
+                      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000/60), (ActionEvent event) -> {
 
                       Material m = null;
 

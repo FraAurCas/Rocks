@@ -39,7 +39,7 @@ public class Material {
     public void level(){
 
     }
-    //TODO: Work on this
+
     public boolean fall(){
         if (y < sim.getYLen() -1 && (getBelow() == null)){//second part will need to be refined to be
             moveDown();                                 //not solid.
@@ -55,7 +55,7 @@ public class Material {
             return false;
         }
     }
-    public boolean fallLiquid(){
+    /*public boolean fallLiquid(){
         if (y < sim.getYLen() -1 && (getBelow() == null)){//second part will need to be refined to be
             moveDown();                                 //not solid.
             return true;
@@ -66,7 +66,7 @@ public class Material {
             return false;
         }
     }
-
+*/
     public int getDensity(){
         return density;
     }
@@ -171,7 +171,7 @@ public class Material {
         sim.changeMatPos(this, x, y, d, y);
         x=d;
     }
-//Make the following account for edges
+
     public void moveRight(){
         if(getX()<getXBounds()-1){
             if(getRight()!=null && getRight().getDensity()<getDensity()){

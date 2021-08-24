@@ -15,58 +15,5 @@ public class Water extends Liquid{
 
 
 
-//         if(getBelow()==null)
-//             fall();
-//         else if(getY()==getYBounds()-1){
-//             if(getRight() == null && getLeft() == null){
-//             if(Math.random()>0.5){
-//                 moveLeft();
 
-//              }
-//             else{
-//                 moveRight();
-//             }
-//         }
-//         }
-//         else if (getBelow().getRight() == null && getBelow().getLeft() == null){
-//             if(Math.random()>0.5){
-//                 moveLeft();
-
-//              }
-//             else{
-//                 moveRight();
-//             }
-//         }
-//         else if (getBelow().getLeft() == null)
-//             moveLeft();
-//         else if (getBelow().getRight()==null)
-//             moveRight();
-
-//         else if (getBelow().getRight().getRight() == null && getBelow().getLeft().getLeft() == null){
-//             if(Math.random()>0.5){
-//                 moveLeft();
-//                 moveLeft();
-
-//             }
-//         else{
-//             moveRight();
-//             moveRight();
-//             }
-//         }
-//         else if (getBelow().getLeft().getLeft() == null)
-// {            moveLeft();
-//             moveLeft();}
-//               else if (getBelow().getRight().getRight()==null){
-//             moveRight();
-//             moveRight();}
-//         // else if(getRight() == null && getLeft() == null){
-//         //     if(Math.random()>0.5){
-//         //         moveLeft();
-
-//         //      }
-//         //     else{
-//         //         moveRight();
-//         //     }
-//         // }
-//     }
 }

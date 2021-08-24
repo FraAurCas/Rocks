@@ -43,19 +43,7 @@ public class Liquid extends Material{
                   }
                 }
               }
-              if (getX() - checkLen >= 0 && !isBoundedLeft) {
-                  if (sim.getMaterial(getX() - checkLen, getY()) != null) {
-                      isBoundedLeft = true;
-                      continue;
-                  }
-                  m = sim.getMaterial(getX() - checkLen, getY() + 1);
-                  if (m == null) {
-                      for (int i = 0; i < checkLen; i++)
-                          moveLeft();
-                      levelV();
-                      return;
-                  }
-              }
+
 
               if (getX() + checkLen < getXBounds() && !isBoundedRight) {
                   if (sim.getMaterial(getX() + checkLen, getY()) != null) {
@@ -70,6 +58,19 @@ public class Liquid extends Material{
                       return;
                   }
               }
+              if (getX() - checkLen >= 0 && !isBoundedLeft) {
+                  if (sim.getMaterial(getX() - checkLen, getY()) != null) {
+                      isBoundedLeft = true;
+                      continue;
+                  }
+                  m = sim.getMaterial(getX() - checkLen, getY() + 1);
+                  if (m == null) {
+                      for (int i = 0; i < checkLen; i++)
+                          moveLeft();
+                      levelV();
+                      return;
+                  }
+              }
 
               if (checkLen > getXBounds())
                   break;
@@ -79,10 +80,3 @@ public class Liquid extends Material{
   }
 
 }
-
-//Restructure program to make Liquid and LooseSolid classes instead of interfaces
-//Pass distinct values for each material into the appropriate supers
-//Make liquid not teleport (perhaps push other blocks down the row); ensure no movements are more than one pixel
-//Fix crash when a material is added in the pixel of a pixel that is moving
-//Add custom materials
-//Gasses?
