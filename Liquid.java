@@ -52,8 +52,6 @@ public class Liquid extends Material{
                   }
                   m = sim.getMaterial(getX() + checkLen, getY() + 1);
                   if (m == null) {
-
-
                       for (int i = 0; i < checkLen; i++)
                           moveRight();
                       levelV();
@@ -67,9 +65,8 @@ public class Liquid extends Material{
                   }
                   m = sim.getMaterial(getX() - checkLen, getY() + 1);
                   if (m == null) {
-                    if(getRight()!=null && getRight().getName().equals(this.getName())){
-                      System.out.println("m");
-                      getRight().setMoved(true);}
+                    if(getRight()!=null && getRight().getName().equals(this.getName()))
+                      getRight().setMoved(true);
                       for (int i = 0; i < checkLen; i++)
                           moveLeft();
                       levelV();

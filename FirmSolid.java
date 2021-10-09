@@ -1,25 +1,29 @@
 import javafx.scene.paint.Color;
 public class FirmSolid extends Material{
+  private boolean locked = false;
 
   public FirmSolid(SimArea sim, String name, Color color, int maxLayers, long vSpeed, int spikeHeight, int x, int y, int density){
     super(sim, name, color, maxLayers, vSpeed, spikeHeight, x, y, density);
   }
   @Override
   public boolean fall(){
-    if(((getLeft()!=null)&&(getLeft().getName().equals(getName()))&&(getLeft().getcurLayer(getName()) > 0)) || ((getRight()!=null)&&(getRight().getName().equals(getName()))&&(getRight().getcurLayer(getName()) > 0)) || ((getAbove()!=null)&&(getAbove().getName().equals(getName()))&&(getAbove().getcurLayer(getName()) >0)) || ((getBelow()!=null)&&(getBelow().getName().equals(getName()))&&(getBelow().getcurLayer(getName()) > 0))){
+    if(locked){
+      return false;
+    }
+    else if(((getLeft()!=null)&&(getLeft().getName().equals(getName()))&&(getLeft().getcurLayer(getName()) > 0)) || ((getRight()!=null)&&(getRight().getName().equals(getName()))&&(getRight().getcurLayer(getName()) > 0)) || ((getAbove()!=null)&&(getAbove().getName().equals(getName()))&&(getAbove().getcurLayer(getName()) >0)) || ((getBelow()!=null)&&(getBelow().getName().equals(getName()))&&(getBelow().getcurLayer(getName()) > 0))){
         return true;
       }
-      else if (getY() < sim.getYLen() -1 && (getBelow() == null)){//second part will need to be refined to be
-          moveDown();                                 //not solid.
+      else if (getY() < sim.getYLen() -1 && (getBelow() == null)){
+          moveDown();
           return true;
-          //System.out.println(y);
+
       }
       else if(getY() < sim.getYLen()-1 && getBelow().getDensity()<getDensity()){
           sim.swap(this, getBelow());
           return true;
       }
       else{
-          //System.out.println("Layer: " + getcurLayer() + "\nSpike: " + getcurSpikeHeight());
+
           return false;
       }
   }
@@ -47,7 +51,7 @@ public class FirmSolid extends Material{
       }
   }
   public int getcurLayer(String name){
-      if(getY()==sim.getYLen()-1){
+      /*if(getY()==sim.getYLen()-1){
           return 1;}
       else if(getY() == sim.getYLen()-1){
         return 1;
@@ -69,6 +73,29 @@ public class FirmSolid extends Material{
       else {
           return 1;
       }
+*/
+  if((getY()==sim.getYLen()-1)||(getY() == sim.getYLen()-1)){
+    locked=true;
+    return 1;
+  }
+  else if (getBelow() == null){
+    if ((getLeft()!=null && getLeft().getName().equals(getName()))||(getRight()!=null && getRight().getName().equals(getName()))){
+      locked=true;
+      return 1;
+    }
+    else{
+      return -10000;
+    }
+  }
+  else if (getBelow().getName() == name){
+      locked=true;
+      return 1;
+  }
+  else {
+
+      return -10000;
+  }
+
 
   }
 }

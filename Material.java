@@ -55,18 +55,7 @@ public class Material {
             return false;
         }
     }
-    /*public boolean fallLiquid(){
-        if (y < sim.getYLen() -1 && (getBelow() == null)){//second part will need to be refined to be
-            moveDown();                                 //not solid.
-            return true;
-            //System.out.println(y);
-        }
-        else{
-            System.out.println("Layer: " + getcurLayer("Water"));
-            return false;
-        }
-    }
-*/
+
     public int getDensity(){
         return density;
     }

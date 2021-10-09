@@ -22,9 +22,9 @@ public class GraphicsHandler extends Application{
     public void start(Stage primaryStage){
 
         final int FPS = 60;
-        final int X_LEN = 400; //How many spaces wide the world is
-        final int Y_LEN = 250; //How many spaces tall the world is
-        final int EDGE_LEN = 5; //How many pixels each material is graphically displayed as
+        final int X_LEN = 200; //How many spaces wide the world is
+        final int Y_LEN = 125; //How many spaces tall the world is
+        final int EDGE_LEN = 10; //How many pixels each material is graphically displayed as
 
         SimArea sim = new SimArea(X_LEN, Y_LEN);
 
@@ -111,7 +111,11 @@ public class GraphicsHandler extends Application{
                     else if (e.isMiddleButtonDown()){
                       int x = (int)e.getX()/EDGE_LEN;
                       int y = (int)e.getY()/EDGE_LEN;
-                      sim.delete(x, y);
+                      if(sim.getMaterial(x,y)==null)
+                      {}
+                      else if(!sim.getMaterial(x,y).getName().equals("Dirt")){
+                        sim.delete(x, y);
+                      }
                     }
                 });
                 pane.setPrefSize(X_LEN * EDGE_LEN, Y_LEN * EDGE_LEN);
